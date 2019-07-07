@@ -12,7 +12,7 @@
         v-bind:src="`https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${inputurl}/app/`"
         alight="right"
       >
-  
+
   </div>
 </template>
 
