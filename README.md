@@ -1,12 +1,14 @@
-## Demo Appmesh capability that it can mesh both K8s and Farg8 workloads
-## Inspired By: 
-#### Github: https://github.com/PaulMaddox/aws-appmesh-helm
-#### Github: https://github.com/enghwa/cdkcolorteller
-#### Github: https://github.com/aws/aws-app-mesh-examples
+# Demo Appmesh capability and mesh both K8s and Farg8 workloads
 
-1) Deploy Fargate CDK components
-$ cd cdkcolorteller
+@ Inspired By: 
+@@ Github: https://github.com/PaulMaddox/aws-appmesh-helm
+@@ Github: https://github.com/enghwa/cdkcolorteller
+@@ Github: https://github.com/aws/aws-app-mesh-examples
 
+##) Deploy Fargate CDK components
+```$ cd cdkcolorteller ```
+
+```
 # ensure we have node 8
 $ nvm install 8.14.0
 $ nvm alias default v8.14.0
@@ -30,6 +32,7 @@ $ vi vueapp/src/App.vue
 # Let CDK redeploy the VueJS container.
 $ npm run build
 $ cdk deploy
+```
 
 2) Create EKS cluster in the same VPC as Fargate
 
