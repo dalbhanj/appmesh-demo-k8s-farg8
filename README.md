@@ -171,7 +171,7 @@ kubectl -n appmesh-system port-forward svc/grafana 3000:3000
 ```
 # delete EKS resources
 $ helm del --purge aws-appmesh-k8s
-$ helm del --purge aws-appmesh
+$ helm del --purge colorapp-appmesh-demo
 $ kubectl delete crds \
     meshes.appmesh.k8s.aws \
     virtualnodes.appmesh.k8s.aws \
