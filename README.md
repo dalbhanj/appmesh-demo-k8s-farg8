@@ -8,7 +8,7 @@
 ## Deploy Fargate CDK components
 
 ```
-$ cd cdkcolorteller 
+$ cd cdkcolorteller
 
 # ensure we have node 8
 $ nvm install 8.14.0
@@ -26,6 +26,10 @@ $ npm run build
 # cdk bootstrap s3 bucket and deploy
 $ cdk bootstrap
 $ cdk deploy
+
+# make sure you have docker installed and running or else you will get docker build error
+
+# this will create all Fargate resources and output the ALB endpoint for Vue app
 
 # Once cdk is deployed, edit App.vue, line 27 and assign the ALB DNS Name to "inputurl"
 $ vi vueapp/src/App.vue
