@@ -84,9 +84,10 @@ $ eksctl create cluster -f cluster.yaml
 $ kubectl get nodes
 ```
 
-3) Setup a K8s service account for Helm (kubernetes package manager) and install Helm
+## Setup a K8s service account for Helm (kubernetes package manager) and install Helm
 
-cat <<EoF > helm-rbac.yaml
+```
+$ cat <<EoF > helm-rbac.yaml
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -113,16 +114,21 @@ $ kubectl apply -f helm-rbac.yaml
 # install Helm into the K8s cluster
 $ helm init --service-account=tiller
 $ helm ls
+```
 
-4) Deploy helm chart to install k8s appmesh components (aws-appmesh-controller, aws-appmesh-grafana, aws-appmesh-inject, aws-appmesh-prometheus)
+## Deploy helm chart to install k8s appmesh components (aws-appmesh-controller, aws-appmesh-grafana, aws-appmesh-inject, aws-appmesh-prometheus)
 
+```
 $ cd appmesh-demo-k8s-farg8
 $ helm install -n aws-appmesh --namespace appmesh-system .
-
-5) Create colorapp service
+```
+## Create colorapp service
+```
 $ cd colorapp-appmesh-demo
 $ helm install -n colorapp-appmesh-demo .
 
+# Show application deployed
+kubectl get pods -n appmesh-demo
 
 # Test in k8s
 $ kubectl run -n appmesh-demo -it curler --image=tutum/curl /bin/bash
@@ -130,23 +136,55 @@ $ kubectl run -n appmesh-demo -it curler --image=tutum/curl /bin/bash
 # for i in {1..10}; do curl colorgateway:9080/color; echo; done
 
 # Edit weights
-
 $ kubectl edit VirtualService colorteller.appmesh-demo -n appmesh-demo
+```
 
+## Explore Appmesh capabilities in Kubernetes
+```
+# Show X-Ray Console
 
-6) Cleanup
-helm del --purge aws-appmesh-demo
-helm del --purge aws-appmesh
-kubectl delete crds \
+# Show Analytics, Traces, Latency per trace
+
+# Show Grafana dashboard
+kubectl -n appmesh-system port-forward svc/grafana 3000:3000
+```
+
+## Explore Appmesh capabilities in Fargate
+```
+# By default, colorgateway will route to blue color
+# Show Response code (View > Developer > Delevoper Tools)
+
+## Demo Canary deployment
+# Go to AppMesh console, edit colorteller-route, and "Add Target"
+
+# Open AWS X-ray after their is enough data
+# Create Group and name "colormesh" and enter filter expression
+(service("colormesh/colorgateway-vn")) AND http.url ENDSWITH "/color"
+# Explore Service Map
+# Explore Traces
+# Explore Analytics (show user agent)
+```
+
+## Cleanup
+```
+# delete EKS resources
+$ helm del --purge aws-appmesh-demo
+$ helm del --purge aws-appmesh
+$ kubectl delete crds \
     meshes.appmesh.k8s.aws \
     virtualnodes.appmesh.k8s.aws \
     virtualservices.appmesh.k8s.aws
-kubectl delete ns appmesh-demo appmesh-system
+$ kubectl delete ns appmesh-demo appmesh-system
+$ eksctl delete cluster --name=appmesh-demo
 
+# delete Fargate resources
+$ cdk destroy
+```
 
 
 ## TROUBLESHOOTING ###
 
+```
 # Error: release colorapp-appmesh-demo failed: object is being deleted: meshes.appmesh.k8s.aws "colormesh" already exists. Follow the steps to resolve
 https://github.com/kubernetes/kubernetes/issues/60538
 
@@ -163,3 +201,5 @@ kubectl patch crd/meshes.appmesh.k8s.aws -p '{"metadata":{"finalizers":[]}}' --t
 # delete crd
 kubectl delete crds/meshes.appmesh.k8s.aws
 customresourcedefinition.apiextensions.k8s.io "meshes.appmesh.k8s.aws" deleted
+
+```
