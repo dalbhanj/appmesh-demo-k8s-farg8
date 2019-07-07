@@ -1,11 +1,15 @@
-# Demo Appmesh capability and mesh both K8s and Farg8 workloads
+# Demo Appmesh and mesh both K8s and Farg8 workloads
 
 @ Inspired By: 
+
 @@ Github: https://github.com/PaulMaddox/aws-appmesh-helm
+
 @@ Github: https://github.com/enghwa/cdkcolorteller
+
 @@ Github: https://github.com/aws/aws-app-mesh-examples
 
-##) Deploy Fargate CDK components
+## Deploy Fargate CDK components
+
 ```$ cd cdkcolorteller ```
 
 ```
@@ -34,8 +38,9 @@ $ npm run build
 $ cdk deploy
 ```
 
-2) Create EKS cluster in the same VPC as Fargate
+## Create EKS cluster in the same VPC as Fargate
 
+```
 # create a config file for our cluster (replace the region, vpc id, az's and subnet ID's with yours)
 cat << EOF > cluster.yaml
 apiVersion: eksctl.io/v1alpha5
@@ -70,6 +75,7 @@ $ eksctl create cluster -f cluster.yaml
 
 # check if you can list the nodes in the cluster
 $ kubectl get nodes
+```
 
 3) Setup a K8s service account for Helm (kubernetes package manager) and install Helm
 
