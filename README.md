@@ -1,12 +1,9 @@
 # Demo Appmesh and mesh both K8s and Farg8 workloads
 
-@ Inspired By: 
-
-@@ Github: https://github.com/PaulMaddox/aws-appmesh-helm
-
-@@ Github: https://github.com/enghwa/cdkcolorteller
-
-@@ Github: https://github.com/aws/aws-app-mesh-examples
+@ Inspired By:  
+-- Github: https://github.com/PaulMaddox/aws-appmesh-helm  
+-- Github: https://github.com/enghwa/cdkcolorteller   
+-- Github: https://github.com/aws/aws-app-mesh-examples
 
 ## Deploy Fargate CDK components
 
@@ -23,7 +20,7 @@ $ npm i -g aws-cdk@0.28.0
 # install node modules
 $ npm install
 
-# transpile ts to js 
+# transpile ts to js
 $ npm run build
 
 # cdk bootstrap s3 bucket and deploy
@@ -31,7 +28,7 @@ $ cdk bootstrap
 $ cdk deploy
 
 # Once cdk is deployed, edit App.vue, line 27 and assign the ALB DNS Name to "inputurl"
-$ vi vueapp/src/App.vue 
+$ vi vueapp/src/App.vue
 
 # Let CDK redeploy the VueJS container.
 $ npm run build
@@ -123,7 +120,7 @@ $ kubectl run -n appmesh-demo -it curler --image=tutum/curl /bin/bash
 # for i in {1..10}; do curl colorgateway:9080/color; echo; done
 
 # Edit weights
- 
+
 $ kubectl edit VirtualService colorteller.appmesh-demo -n appmesh-demo
 
 
@@ -140,7 +137,7 @@ kubectl delete ns appmesh-demo appmesh-system
 
 ## TROUBLESHOOTING ###
 
-# Error: release colorapp-appmesh-demo failed: object is being deleted: meshes.appmesh.k8s.aws "colormesh" already exists. Follow the steps to resolve 
+# Error: release colorapp-appmesh-demo failed: object is being deleted: meshes.appmesh.k8s.aws "colormesh" already exists. Follow the steps to resolve
 https://github.com/kubernetes/kubernetes/issues/60538
 
 # patch custom resource
@@ -156,5 +153,3 @@ kubectl patch crd/meshes.appmesh.k8s.aws -p '{"metadata":{"finalizers":[]}}' --t
 # delete crd
 kubectl delete crds/meshes.appmesh.k8s.aws
 customresourcedefinition.apiextensions.k8s.io "meshes.appmesh.k8s.aws" deleted
-
-
