@@ -7,9 +7,9 @@
 
 ## Deploy Fargate CDK components
 
-```$ cd cdkcolorteller ```
-
 ```
+$ cd cdkcolorteller 
+
 # ensure we have node 8
 $ nvm install 8.14.0
 $ nvm alias default v8.14.0
