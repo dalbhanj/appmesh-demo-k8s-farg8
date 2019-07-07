@@ -12,7 +12,7 @@
 $ export AWS_REGION=us-west-2
 $ export AWS_DEFAULT_REGION=us-west-2
 
-$ cd cdkcolorteller
+$ cd aws-appmesh-farg8/cdkcolorteller
 
 # ensure we have node 8
 $ nvm install 8.14.0
@@ -48,7 +48,7 @@ $ cdk deploy
 ```
 # create a config file for our cluster (replace the region, vpc id, az's and subnet ID's with yours)
 
-$ cd ..
+$ cd ../../aws-appmesh-k8s/
 $ cat << EOF > cluster.yaml
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
@@ -119,11 +119,14 @@ $ helm ls
 ## Deploy helm chart to install k8s appmesh components (aws-appmesh-controller, aws-appmesh-grafana, aws-appmesh-inject, aws-appmesh-prometheus)
 
 ```
-$ helm install -n aws-appmesh --namespace appmesh-system .
+$ helm install -n aws-appmesh-k8s --namespace appmesh-system .
+
+# check pods are running
+$ kubectl get pods -n appmesh-system
 ```
 ## Create colorapp service
 ```
-$ cd colorapp-appmesh-demo
+$ cd ../colorapp-appmesh-demo
 $ helm install -n colorapp-appmesh-demo .
 
 # Show application deployed
