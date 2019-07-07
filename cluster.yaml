@@ -1,0 +1,26 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: appmesh-demo
+  region: us-west-2
+vpc:
+  id: "vpc-05298bdc99654c0bb"
+  subnets:
+    private:
+      us-west-2a:
+        id: "subnet-0c7f87af7c730a0de"  
+      us-west-2b:
+        id: "subnet-0fe80da10494ec936"  
+      us-west-2c:
+        id: "subnet-05187f69e15a5623d"                  
+nodeGroups:
+  - name: ng-1
+    instanceType: m5.large
+    desiredCapacity: 2
+    privateNetworking: true
+    iam:
+      withAddonPolicies:
+        albIngress: true
+        autoScaler: true
+        appMesh: true
+        xRay: true

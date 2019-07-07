@@ -1,0 +1,11 @@
+# Default values for aws-appmesh-inject.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: "colorapp-appmesh-demo"
+fullnameOverride: ""
+
+APP_NAMESPACE: appmesh-demo
+MESH_NAME: colormesh
+COLOR_GATEWAY_IMAGE: "970805265562.dkr.ecr.us-west-2.amazonaws.com/gateway:latest"
+COLOR_TELLER_IMAGE: "970805265562.dkr.ecr.us-west-2.amazonaws.com/colorteller:latest"  
