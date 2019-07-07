@@ -47,22 +47,24 @@ $ cdk deploy
 
 ```
 # create a config file for our cluster (replace the region, vpc id, az's and subnet ID's with yours)
-cat << EOF > cluster.yaml
+
+$ cd ..
+$ cat << EOF > cluster.yaml
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 metadata:
   name: appmesh-demo
   region: us-west-2
 vpc:
-  id: "vpc-0491b7ab02e5f4d4e"
+  id: "vpc-01916cdb9af0b13c5"
   subnets:
     private:
       us-west-2a:
-        id: "subnet-0c7f87af7c730a0de"  
+        id: "subnet-02df6460ee653107b"  
       us-west-2b:
-        id: "subnet-0fe80da10494ec936"  
+        id: "subnet-09841b694c3192b5e"  
       us-west-2c:
-        id: "subnet-05187f69e15a5623d"                  
+        id: "subnet-043609911265d0577"                  
 nodeGroups:
   - name: default
     instanceType: m5.large
