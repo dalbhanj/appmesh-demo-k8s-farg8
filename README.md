@@ -8,6 +8,10 @@
 ## Deploy Fargate CDK components
 
 ```
+# configure AWS region
+$ export AWS_REGION=eu-west-1
+$ export AWS_DEFAULT_REGION=eu-west-1
+
 $ cd cdkcolorteller
 
 # ensure we have node 8
@@ -50,7 +54,7 @@ metadata:
   name: appmesh-demo
   region: us-west-2
 vpc:
-  id: "vpc-05298bdc99654c0bb"
+  id: "vpc-0491b7ab02e5f4d4e"
   subnets:
     private:
       us-west-2a:
