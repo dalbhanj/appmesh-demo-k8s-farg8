@@ -119,7 +119,6 @@ $ helm ls
 ## Deploy helm chart to install k8s appmesh components (aws-appmesh-controller, aws-appmesh-grafana, aws-appmesh-inject, aws-appmesh-prometheus)
 
 ```
-$ cd appmesh-demo-k8s-farg8
 $ helm install -n aws-appmesh --namespace appmesh-system .
 ```
 ## Create colorapp service
